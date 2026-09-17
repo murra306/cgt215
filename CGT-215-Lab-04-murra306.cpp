@@ -13,20 +13,34 @@ void printMenu() {
 	cout << "\t4. Exit" << endl;
 	cout << "Your Selection: ";
 }
-void factorial() {
-	// I recommend writing your factorial code here
+float factorial(int n, int *f) {
+	for (int i = n; i >= 1; i--)
+		*f = (*f) * i;
+	return *f;
 }
-void arithmetic() {
-	// I recommend writing your arithmetic series code here
+float arithmetic(float a, float d, int n) {
+	float t;
+	for (int i = 0;i < n;i++) 
+		t = (a * (2 * a + (d - 1) * n)) / 2;
+	return t;
 }
-void geometric() {
-	// I recommend writing your geometric series code here
+float geometric(float a, float d, int n) {
+	float one = 1;
+	float t;
+	for (int i = 0;i < n;i++)
+		one = one * d;
+		t = a*((1-one)/(1-d));
+	return t;
 }
 int main() {
 	int choice;
 	char again;
 	int Input;
-
+	int Input2;
+	int Input3;
+	int result = 1;
+	int AP1;
+	int	AP2;
 	do {
 		printMenu();
 		cin >> choice;
@@ -35,25 +49,40 @@ int main() {
 			return 0;
 		}
 		else if (choice == 1) {
-			factorial();
 			cout << "Factorial = ";
 			cin >> Input;
-			if (Number < 0) {
-				cout << "Please enter a positive number. ";
+			if (Input < 0) {
+				cout << "Factorial of a negative number doesn't exist.";
 			}
-			unsigned long long Sum = 1;
-			for (int i = 1; i <= Input; ++i) {
-				Sum *= Input;
+			else {
+				cout << "Factorial of " << Input << " = " << factorial(Input, &result) << endl;
 			}
-			cout << Sum;
 		}
 		else if (choice == 2) {
-			arithmetic();
-			cout << "Arithmetic";
+			cout << "Base Number = ";
+			cin >> Input;
+			cout << "Increment = ";
+			cin >> Input2;
+			cout << "Amount of Progressions = ";
+			cin >> Input3;
+			AP2 = Input + (Input3 - 1) * Input2;
+			cout << "Arithmetic Progression = ";
+			for (AP1 = Input; AP1 <= AP2; AP1 = AP1 + Input3) {
+				if (AP1 != AP2)
+					cout << AP1 << " + ";
+				else 
+					cout << AP1 << " = " << arithmetic(Input, Input2, Input3) << endl;
+			}
 		}
 		else if (choice == 3) {
-			geometric();
-			cout << "Geometric";
+			cout << "Base Number = ";
+			cin >> Input;
+			cout << "Multiplying by = ";
+			cin >> Input2;
+			cout << "Amount of Progressions = ";
+			cin >> Input3;
+			AP2 = Input*(Input3^(Input2-1));
+			cout << "Geometric =" << geometric(Input, Input2, Input3) << endl;
 		}
 		cout << "Go Again? [Y/N] ";
 		cin >> again;
